@@ -21,12 +21,14 @@ button{
     cursor: pointer;
     transition: brackground-color 0.5s ease;
 }
+/* Estilos Boton Add task */
 .add-button{
     background-color: green;
 }
 .add-button:hover{
     background-color: rgb(52, 101, 52);
 }
+/* Estilos Boton Delete */
 
 .delete-button{
     background-color: red;

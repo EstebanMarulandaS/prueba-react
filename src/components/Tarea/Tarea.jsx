@@ -8,13 +8,18 @@ export const Tarea = () => {
   function handleInputChange(event) {
     setNewTask(event.target.value);
   }
-
+  /* Anadir tarea */
   function addTask() {
-    setTask((t) => [...t, newTask]);
-    setNewTask("");
+    if (newTask.trim() !== "") {
+      setTask((t) => [...t, newTask]);
+      setNewTask("");
+    }
   }
-
-  function deleteTask(index) {}
+  /* Borrar Tarea */
+  function deleteTask(index) {
+    const updatedTasks = tasks.filter((_, idx) => idx !== index);
+    setTask(updatedTasks);
+  }
 
   function moveTaskUp(index) {}
   function moveTaskDown(index) {}
