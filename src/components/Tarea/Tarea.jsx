@@ -2,7 +2,7 @@ import "./tarea.scss";
 import { useState } from "react";
 
 export const Tarea = () => {
-  const [tasks, setTask] = useState(["eat", "take a shower"]);
+  const [tasks, setTask] = useState([]);
   const [newTask, setNewTask] = useState("");
 
   function handleInputChange(event) {
@@ -20,13 +20,32 @@ export const Tarea = () => {
     const updatedTasks = tasks.filter((_, idx) => idx !== index);
     setTask(updatedTasks);
   }
-
-  function moveTaskUp(index) {}
-  function moveTaskDown(index) {}
+  /* Subir Tarea */
+  function moveTaskUp(index) {
+    if (index > 0) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index - 1]] = [
+        updatedTasks[index - 1],
+        updatedTasks[index],
+      ]; //array destructuring
+      setTask(updatedTasks);
+    }
+  }
+  /* Bajar Tarea */
+  function moveTaskDown(index) {
+    if (index < tasks.length - 1) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index + 1]] = [
+        updatedTasks[index + 1],
+        updatedTasks[index],
+      ]; //array destructuring
+      setTask(updatedTasks);
+    }
+  }
 
   return (
     <div className="to-do-list">
-      <h1>To do List</h1>
+      <h1>Task Manager</h1>
 
       <input
         type="text"
@@ -48,7 +67,7 @@ export const Tarea = () => {
             <button className="move-button" onClick={() => moveTaskUp(index)}>
               ⬆️
             </button>
-            <button className="move-button" onClick={() => moveTaskUp(index)}>
+            <button className="move-button" onClick={() => moveTaskDown(index)}>
               ⬇️
             </button>
           </li>
