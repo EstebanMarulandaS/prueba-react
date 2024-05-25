@@ -1,13 +1,14 @@
+import './App.scss'
+import { Tarea } from './components/Tarea/Tarea'
 
-import './App.css'
+
+
 
 function App() {
 
 
   return (
-    <div>
-      <h1>Initial config</h1>
-    </div>
+  <Tarea/>
   )
 }
 
