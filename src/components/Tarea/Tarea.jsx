@@ -15,7 +15,7 @@ export const Tarea = () => {
       setNewTask("");
     }
   }
-  /* Borrar Tarea */
+  /*Borrar Tarea */
   function deleteTask(index) {
     const updatedTasks = tasks.filter((_, idx) => idx !== index);
     setTask(updatedTasks);
