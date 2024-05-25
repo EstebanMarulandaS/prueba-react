@@ -1,62 +1,86 @@
-body{
+body {
     background-color: rgb(37, 37, 37);
-}
-.to-do-list{
+  }
+  
+  .to-do-list {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    margin-top: 100px;
-}
-
-h1{
-    font-size: 4rem;
+    margin: 5% auto;
+    width: 90%;
+    max-width: 600px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
     color: white;
-}
-button{
-    font-size: 1.7rem;
+  }
+  
+  button {
+    font-size: 1.2rem;
     font-weight: bold;
     padding: 10px 20px;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: brackground-color 0.5s ease;
-}
-/* Estilos Boton Add task */
-.add-button{
+    transition: background-color 0.5s ease;
+  }
+  
+  /* Estilos Boton Add task */
+  .add-button {
     background-color: green;
-}
-.add-button:hover{
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  
+  .add-button:hover {
     background-color: rgb(52, 101, 52);
-}
-/* Estilos Boton Delete */
-
-.delete-button{
+  }
+  
+  /* Estilos Boton Delete */
+  .delete-button {
     background-color: red;
-}
-.delete-button:hover{
-background-color: rgb(132, 10, 10);
-}
-.move-button{
+  }
+  
+  .delete-button:hover {
+    background-color: rgb(132, 10, 10);
+  }
+  
+  .move-button {
     background-color: rgb(52, 52, 241);
-}
-.move-button:hover{
-background-color: rgb(6, 6, 137);
-}
-
-input[type="text"]{
-    font-size: 1.6rem;
+  }
+  
+  .move-button:hover {
+    background-color: rgb(6, 6, 137);
+  }
+  
+  /* Estilos boton Edit */
+  .edit-button {
+    background-color: rgb(241, 134, 52);
+  }
+  
+  .edit-button:hover {
+    background-color: rgb(183, 94, 5);
+  }
+  
+  input[type="text"],
+  input[type="date"] {
+    font-size: 1rem;
     padding: 10px;
     border: 2px solid rgba(0, 0, 0, 0.384);
     border-radius: 5px;
     color: rgba(0, 0, 0, 0.489);
-}
-
-ol{
+    margin: 10px;
+    width: calc(100% - 24px); /* full width minus padding and border */
+    box-sizing: border-box;
+  }
+  
+  ol {
     padding: 0;
-}
-
-li{
-    font-size: 2rem;
+  }
+  
+  li {
+    font-size: 1.2rem;
     font-weight: bold;
     padding: 15px;
     background-color: white;
@@ -64,15 +88,156 @@ li{
     border: 3px solid hsla(0, 0%, 85%, 0.75);
     border-radius: 5px;
     display: flex;
-    align-items: center;
-}
-
-.text{
+    flex-direction: column;
+    align-items: flex-start;
+    word-wrap: break-word;
+  }
+  
+  .text {
     flex: 1;
-}
-
-.delete-button, .move-button{
-    padding: 8px 12px;
-    font-size: 1.4rem;
-    margin-left: 10px;
-}
+    margin-bottom: 10px;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  table {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  td {
+    padding: 5px;
+  }
+  
+  /* Breakpoint ≥576px */
+  @media (min-width: 576px) {
+    h1 {
+      font-size: 2.8rem;
+    }
+  
+    button {
+      font-size: 1.3rem;
+    }
+  
+    li {
+      font-size: 1.3rem;
+    }
+  }
+  
+  /* Breakpoint ≥768px */
+  @media (min-width: 768px) {
+    .to-do-list {
+      width: 80%;
+      margin-top: 50px;
+    }
+  
+    h1 {
+      font-size: 3rem;
+    }
+  
+    button {
+      font-size: 1.4rem;
+    }
+  
+    li {
+      font-size: 1.4rem;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  
+    .text {
+      margin-bottom: 0;
+    }
+  
+    .delete-button,
+    .move-button,
+    .edit-button {
+      font-size: 1.1rem;
+      margin-left: 10px;
+      margin-top: 0;
+    }
+  }
+  
+  /* Breakpoint ≥992px */
+  @media (min-width: 992px) {
+    .to-do-list {
+      width: 70%;
+    }
+  
+    h1 {
+      font-size: 3.5rem;
+    }
+  
+    button {
+      font-size: 1.5rem;
+    }
+  
+    li {
+      font-size: 1.5rem;
+    }
+  
+    .delete-button,
+    .move-button,
+    .edit-button {
+      font-size: 1.2rem;
+    }
+  }
+  
+  /* Breakpoint ≥1200px */
+  @media (min-width: 1200px) {
+    .to-do-list {
+      width: 60%;
+    }
+  
+    h1 {
+      font-size: 4rem;
+    }
+  
+    button {
+      font-size: 1.6rem;
+    }
+  
+    li {
+      font-size: 1.6rem;
+    }
+  
+    .delete-button,
+    .move-button,
+    .edit-button {
+      font-size: 1.3rem;
+    }
+  }
+  
+/* Breakpoint ≥1400px */
+@media (min-width: 1400px) {
+    .to-do-list {
+      width: 50%;
+    }
+  
+    h1 {
+      font-size: 4.5rem;
+    }
+  
+    button {
+      font-size: 1.7rem;
+    }
+  
+    li {
+      font-size: 1.7rem;
+    }
+  
+    .delete-button,
+    .move-button,
+    .edit-button {
+      font-size: 1.4rem;
+    }
+  }
+  
+  
