@@ -1,11 +1,24 @@
 import "./tarea.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const Tarea = () => {
   const [tasks, setTask] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [newTaskDescription, setNewTaskDescription] = useState("");
   const [newTaskDeadline, setNewTaskDeadline] = useState("");
+
+  // Cargar tareas almacenadas en localStorage al montar el componente
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    if (storedTasks) {
+      setTask(storedTasks);
+    }
+  }, []);
+
+  // Guardar tareas en localStorage cuando se actualizan
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   function handleInputChange(event) {
     setNewTask(event.target.value);
@@ -114,21 +127,18 @@ export const Tarea = () => {
                   </td>
                   <td className="text">{task.title}</td>
                 </tr>
-                <hr />
                 <tr>
                   <td>
                     <strong>Description:</strong>
                   </td>
                   <td className="text">{task.description}</td>
                 </tr>
-                <hr />
                 <tr>
                   <td>
                     <strong>Deadline:</strong>
                   </td>
                   <td className="text">{task.deadline}</td>
                 </tr>
-                <hr />
               </tbody>
             </table>
             <div className="button-container">
