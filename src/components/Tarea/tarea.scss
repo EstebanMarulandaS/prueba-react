@@ -71,7 +71,7 @@ body {
     border-radius: 5px;
     color: rgba(0, 0, 0, 0.489);
     margin: 10px;
-    width: calc(100% - 24px); /* full width minus padding and border */
+    width: calc(100% - 24px); 
     box-sizing: border-box;
   }
   
@@ -111,8 +111,32 @@ body {
     margin-bottom: 10px;
   }
   
+  tr {
+    background-color: aliceblue;
+  }
+  
   td {
-    padding: 5px;
+    padding: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  
+  /* Estilos boton completado */
+  .completionCheckBox {
+    width: 30px;
+    height: 30px;
+    margin: 15px;
+  }
+  
+  .completed {
+    background-color: #f0f0f0; 
+    color: #666666; 
+    text-decoration: line-through; 
   }
   
   /* Breakpoint ≥576px */
@@ -215,8 +239,8 @@ body {
     }
   }
   
-/* Breakpoint ≥1400px */
-@media (min-width: 1400px) {
+  /* Breakpoint ≥1400px */
+  @media (min-width: 1400px) {
     .to-do-list {
       width: 50%;
     }
@@ -239,5 +263,4 @@ body {
       font-size: 1.4rem;
     }
   }
-  
   

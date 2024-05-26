@@ -43,11 +43,24 @@ export const Tarea = () => {
         title: newTask,
         description: newTaskDescription,
         deadline: newTaskDeadline,
+        status: getStatus(newTaskDeadline),
+        completed: false,
       };
       setTask((t) => [...t, task]);
       setNewTask("");
       setNewTaskDescription("");
       setNewTaskDeadline("");
+    }
+  }
+
+  // Función para obtener el estado de la tarea
+  function getStatus(deadline) {
+    const today = new Date();
+    const taskDeadline = new Date(deadline);
+    if (taskDeadline < today) {
+      return "due";
+    } else {
+      return "on time";
     }
   }
 
@@ -90,6 +103,13 @@ export const Tarea = () => {
     deleteTask(index);
   }
 
+  /* Marcar tarea como completada */
+  function toggleTaskCompletion(index) {
+    const updatedTasks = [...tasks];
+    updatedTasks[index].completed = !updatedTasks[index].completed;
+    setTask(updatedTasks);
+  }
+
   return (
     <div className="to-do-list">
       <h1>Task Manager</h1>
@@ -118,7 +138,7 @@ export const Tarea = () => {
 
       <ol>
         {tasks.map((task, index) => (
-          <li key={index}>
+          <li key={index} className={task.completed ? "completed" : ""}>
             <table>
               <tbody>
                 <tr>
@@ -127,17 +147,35 @@ export const Tarea = () => {
                   </td>
                   <td className="text">{task.title}</td>
                 </tr>
+
                 <tr>
                   <td>
                     <strong>Description:</strong>
                   </td>
                   <td className="text">{task.description}</td>
                 </tr>
+
                 <tr>
                   <td>
                     <strong>Deadline:</strong>
                   </td>
                   <td className="text">{task.deadline}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Completion:</strong>
+                  </td>
+                  <td className="text">
+                    <input
+                      className="completionCheckBox"
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={() => toggleTaskCompletion(index)}
+                    />
+                    <label htmlFor={`task-${index}-completed`}>
+                      {task.completed ? "Completed" : "Incomplete"}
+                    </label>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -161,7 +199,6 @@ export const Tarea = () => {
                 ⬇️
               </button>
             </div>
-            {/* Hi */}
           </li>
         ))}
       </ol>
