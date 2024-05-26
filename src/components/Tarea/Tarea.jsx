@@ -43,7 +43,6 @@ export const Tarea = () => {
         title: newTask,
         description: newTaskDescription,
         deadline: newTaskDeadline,
-        status: getStatus(newTaskDeadline),
         completed: false,
       };
       setTask((t) => [...t, task]);
@@ -54,13 +53,15 @@ export const Tarea = () => {
   }
 
   // Función para obtener el estado de la tarea
-  function getStatus(deadline) {
+  function getStatus(deadline, completed) {
     const today = new Date();
     const taskDeadline = new Date(deadline);
-    if (taskDeadline < today) {
-      return "due";
+    if (completed) {
+      return "Completed";
+    } else if (taskDeadline < today) {
+      return "Due";
     } else {
-      return "on time";
+      return "On Time";
     }
   }
 
@@ -135,73 +136,85 @@ export const Tarea = () => {
       <button className="add-button" onClick={addTask}>
         Add Task
       </button>
+      <div className="gridItems">
+        <ol>
+          {tasks.map((task, index) => (
+            <li key={index} className={task.completed ? "completed" : ""}>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Title:</strong>
+                    </td>
+                    <td className="text">{task.title}</td>
+                  </tr>
 
-      <ol>
-        {tasks.map((task, index) => (
-          <li key={index} className={task.completed ? "completed" : ""}>
-            <table>
-              <tbody>
-                <tr>
-                  <td>
-                    <strong>Title:</strong>
-                  </td>
-                  <td className="text">{task.title}</td>
-                </tr>
+                  <tr>
+                    <td>
+                      <strong>Description:</strong>
+                    </td>
+                    <td className="text">{task.description}</td>
+                  </tr>
 
-                <tr>
-                  <td>
-                    <strong>Description:</strong>
-                  </td>
-                  <td className="text">{task.description}</td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <strong>Deadline:</strong>
-                  </td>
-                  <td className="text">{task.deadline}</td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Completion:</strong>
-                  </td>
-                  <td className="text">
-                    <input
-                      className="completionCheckBox"
-                      type="checkbox"
-                      checked={task.completed}
-                      onChange={() => toggleTaskCompletion(index)}
-                    />
-                    <label htmlFor={`task-${index}-completed`}>
-                      {task.completed ? "Completed" : "Incomplete"}
-                    </label>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="button-container">
-              <button className="edit-button" onClick={() => editTask(index)}>
-                Edit
-              </button>
-              <button
-                className="delete-button"
-                onClick={() => deleteTask(index)}
-              >
-                Delete
-              </button>
-              <button className="move-button" onClick={() => moveTaskUp(index)}>
-                ⬆️
-              </button>
-              <button
-                className="move-button"
-                onClick={() => moveTaskDown(index)}
-              >
-                ⬇️
-              </button>
-            </div>
-          </li>
-        ))}
-      </ol>
+                  <tr>
+                    <td>
+                      <strong>Deadline:</strong>
+                    </td>
+                    <td className="text">{task.deadline}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Completion:</strong>
+                    </td>
+                    <td className="text">
+                      <input
+                        className="completionCheckBox"
+                        type="checkbox"
+                        checked={task.completed}
+                        onChange={() => toggleTaskCompletion(index)}
+                      />
+                      <label htmlFor={`task-${index}-completed`}>
+                        {task.completed ? "Completed" : "Incomplete"}
+                      </label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Status:</strong>
+                    </td>
+                    <td className="text">
+                      {getStatus(task.deadline, task.completed)}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="button-container">
+                <button className="edit-button" onClick={() => editTask(index)}>
+                  Edit
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => deleteTask(index)}
+                >
+                  Delete
+                </button>
+                <button
+                  className="move-button"
+                  onClick={() => moveTaskUp(index)}
+                >
+                  ⬆️
+                </button>
+                <button
+                  className="move-button"
+                  onClick={() => moveTaskDown(index)}
+                >
+                  ⬇️
+                </button>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 };
